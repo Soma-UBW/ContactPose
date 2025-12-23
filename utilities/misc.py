@@ -332,7 +332,7 @@ def colorcode_depth_image(im):
 
 
 def draw_hands(im, joints, colors=((0, 255, 0), (0, 0, 255)), circle_radius=3,
-               line_thickness=2, offset=np.zeros(2, dtype=np.int)):
+               line_thickness=2, offset=np.zeros(2, dtype=int)):
   if im is None:
     print('Invalid image')
     return im
@@ -342,7 +342,7 @@ def draw_hands(im, joints, colors=((0, 255, 0), (0, 0, 255)), circle_radius=3,
     if js is None:
       continue
     else:
-      js = np.round(js-offset[np.newaxis, :]).astype(np.int)
+      js = np.round(js-offset[np.newaxis, :]).astype(int)
     for j in js:
       im = cv2.circle(im, tuple(j), circle_radius, c, -1, cv2.LINE_AA)
     for finger in range(5):
@@ -356,10 +356,10 @@ def draw_hands(im, joints, colors=((0, 255, 0), (0, 0, 255)), circle_radius=3,
 
 
 def draw_object_markers(im, ms, color=(0, 255, 255), circle_radius=3,
-                        offset=np.zeros(2, dtype=np.int)):
+                        offset=np.zeros(2, dtype=int)):
   if im.ndim == 2:  # depth image
     im = colorcode_depth_image(im)
-  for m in np.round(ms).astype(np.int):
+  for m in np.round(ms).astype(int):
     im = cv2.circle(im, tuple(m-offset), circle_radius, color, -1, cv2.LINE_AA)
   return im
 
@@ -379,12 +379,12 @@ def crop_image(im, joints, crop_size, fillvalue=[0]):
     fillvalue = np.asarray([fillvalue for _ in im.shape[2]]).astype(im.dtype)
 
   joints = np.vstack([j for j in joints if j is not None])
-  bbcenter = np.round(np.mean(joints, axis=0)).astype(np.int)
+  bbcenter = np.round(np.mean(joints, axis=0)).astype(int)
   im_crop = np.zeros((crop_size, crop_size, im.shape[2]), dtype=im.dtype)
   tl = bbcenter - crop_size//2
   br = bbcenter + crop_size//2
-  tl_crop = np.asarray([0, 0], dtype=np.int)
-  br_crop = np.asarray([crop_size, crop_size], dtype=np.int)
+  tl_crop = np.asarray([0, 0], dtype=int)
+  br_crop = np.asarray([crop_size, crop_size], dtype=int)
   tl_spill = np.minimum(0, tl)
   tl -= tl_spill
   tl_crop -= tl_spill

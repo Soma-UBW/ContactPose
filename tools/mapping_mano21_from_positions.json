@@ -1,0 +1,33 @@
+{
+  "format": "wide",
+  "unit": "UNKNOWN",
+  "scale": 0.01,
+  "joints": [
+    {"x":"Hand_Position_X","y":"Hand_Position_Y","z":"Hand_Position_Z"},
+
+    {"x":"Thumb_CMC_Position_X","y":"Thumb_CMC_Position_Y","z":"Thumb_CMC_Position_Z"},
+    {"x":"Thumb_MCP_Position_X","y":"Thumb_MCP_Position_Y","z":"Thumb_MCP_Position_Z"},
+    {"x":"Thumb_DIP_Position_X","y":"Thumb_DIP_Position_Y","z":"Thumb_DIP_Position_Z"},
+    {"x":"Thumb_TIP_Position_X","y":"Thumb_TIP_Position_Y","z":"Thumb_TIP_Position_Z"},
+
+    {"x":"Index_MCP_Position_X","y":"Index_MCP_Position_Y","z":"Index_MCP_Position_Z"},
+    {"x":"Index_PIP_Position_X","y":"Index_PIP_Position_Y","z":"Index_PIP_Position_Z"},
+    {"x":"Index_DIP_Position_X","y":"Index_DIP_Position_Y","z":"Index_DIP_Position_Z"},
+    {"x":"Index_TIP_Position_X","y":"Index_TIP_Position_Y","z":"Index_TIP_Position_Z"},
+
+    {"x":"Middle_MCP_Position_X","y":"Middle_MCP_Position_Y","z":"Middle_MCP_Position_Z"},
+    {"x":"Middle_PIP_Position_X","y":"Middle_PIP_Position_Y","z":"Middle_PIP_Position_Z"},
+    {"x":"Middle_DIP_Position_X","y":"Middle_DIP_Position_Y","z":"Middle_DIP_Position_Z"},
+    {"x":"Middle_TIP_Position_X","y":"Middle_TIP_Position_Y","z":"Middle_TIP_Position_Z"},
+
+    {"x":"Ring_MCP_Position_X","y":"Ring_MCP_Position_Y","z":"Ring_MCP_Position_Z"},
+    {"x":"Ring_PIP_Position_X","y":"Ring_PIP_Position_Y","z":"Ring_PIP_Position_Z"},
+    {"x":"Ring_DIP_Position_X","y":"Ring_DIP_Position_Y","z":"Ring_DIP_Position_Z"},
+    {"x":"Ring_TIP_Position_X","y":"Ring_TIP_Position_Y","z":"Ring_TIP_Position_Z"},
+
+    {"x":"Pinky_MCP_Position_X","y":"Pinky_MCP_Position_Y","z":"Pinky_MCP_Position_Z"},
+    {"x":"Pinky_PIP_Position_X","y":"Pinky_PIP_Position_Y","z":"Pinky_PIP_Position_Z"},
+    {"x":"Pinky_DIP_Position_X","y":"Pinky_DIP_Position_Y","z":"Pinky_DIP_Position_Z"},
+    {"x":"Pinky_TIP_Position_X","y":"Pinky_TIP_Position_Y","z":"Pinky_TIP_Position_Z"}
+  ]
+}
