@@ -118,7 +118,7 @@ class MANOFitter(object):
         objective,
         x0=(m.pose, m.betas, m.trans),
         method='dogleg',
-        options={'maxiter': 10}
+        options={'maxiter': 50}
       )
 
       p = mano_param_dict(n_pose_params)

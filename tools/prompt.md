@@ -1,3 +1,5 @@
+# csv to npy and json
+
 cd C:\Users\shimi\Documents\aolab\ContactPose
 
 .\.venv310\Scripts\Activate.ps1
@@ -25,3 +27,22 @@ python tools\fit_all_frames_mp.py `
   --only_final `
   --out_json out\miura_fit_mp_all.json
 
+# json visualize
+
+python tools\vis_mano.py `
+  --json out\miura_fit_mp_all.json `
+  --joints_npy out\miura_joints21.npy `
+  --frame 123 `
+  --side right
+
+python tools\vis_mano.py `
+  --json out\miura_mano_fit_frame0.json `
+  --joints_npy out\miura_joints21.npy `
+  --frame 0 `
+  --side right `
+  --show_mano_frame
+
+# npy visualize
+python tools\vis_joints_npy.py `
+--npy out\miura_joints21.npy `
+--frame 0
