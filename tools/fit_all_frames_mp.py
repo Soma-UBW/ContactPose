@@ -2,6 +2,7 @@ import argparse, json, os
 import numpy as np
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
+import contextlib
 
 # ---- globals (each worker process) ----
 G_JOINTS = None
@@ -53,22 +54,30 @@ def _init_worker(joints_path: str, side: str, n_pose_params: int, shape_sigma: f
 
 def _fit_one(frame_idx: int):
     global G_JOINTS, G_FITTER, G_SIDE, G_N_POSE_PARAMS, G_SHAPE_SIGMA, G_ONLY_FINAL
+
     J = np.asarray(G_JOINTS[frame_idx], dtype=np.float64)  # (21,3)
     both = (None, J) if G_SIDE == "right" else (J, None)
+
     try:
-        out = G_FITTER.fit_joints(
-            both,
-            n_pose_params=G_N_POSE_PARAMS,
-            shape_sigma=G_SHAPE_SIGMA,
-            save_filename=None
-        )
+        with open(os.devnull, "w") as dn, \
+             contextlib.redirect_stdout(dn), \
+             contextlib.redirect_stderr(dn):
+            out = G_FITTER.fit_joints(
+                both,
+                n_pose_params=G_N_POSE_PARAMS,
+                shape_sigma=G_SHAPE_SIGMA,
+                save_filename=None
+            )
+
         if G_ONLY_FINAL:
             final = _pick_final(out)
             return {"frame": frame_idx, "ok": True, "out": _to_jsonable(final)}
         else:
             return {"frame": frame_idx, "ok": True, "out": _to_jsonable(out)}
+
     except Exception as e:
         return {"frame": frame_idx, "ok": False, "error": str(e)}
+
 
 def main():
     ap = argparse.ArgumentParser()
