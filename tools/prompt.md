@@ -1,4 +1,4 @@
-# csv to npy and json
+# setup
 
 cd C:\Users\shimi\Documents\aolab\ContactPose
 
@@ -12,37 +12,60 @@ $env:OPENBLAS_NUM_THREADS="1"
 
 $env:PYTHONPATH = (Get-Location).Path + ";" + $env:PYTHONPATH
 
+# csv to npy
+
+python tools\csv_to_npy.py `
+  --csv C:\Users\shimi\Documents\aolab\Contactpose\csv\05_akimoto.csv `
+  --out_npy out\akimoto.npy `
+  --unit cm `
+  --make_right
+
+# npy visualize
+python tools\vis_joints_npy.py `
+--npy out\akimoto.npy `
+--frame 0
+
+# npy to json
+
+python tools\fit_one_frame.py `
+  --joints_npy out\akimoto.npy `
+  --frame 0 `
+  --side right `
+  --out_json out\akimoto_frame0.json
+
 python tools\fit_all_frames_mp.py `
-  --joints_npy out\miura_joints21.npy `
+  --joints_npy out\miura.npy `
   --side right `
   --start 0 --end 200 `
   --workers 8 `
   --only_final `
-  --out_json out\miura_fit_mp_0_200.json
+  --out_json out\miura_frame0to200.json
 
 python tools\fit_all_frames_mp.py `
-  --joints_npy out\miura_joints21.npy `
+  --joints_npy out\miura.npy `
   --side right `
   --workers 8 `
   --only_final `
-  --out_json out\miura_fit_mp_all.json
+  --out_json out\miura_all.json
 
 # json visualize
 
 python tools\vis_mano.py `
-  --json out\miura_fit_mp_all.json `
-  --joints_npy out\miura_joints21.npy `
-  --frame 123 `
-  --side right
-
-python tools\vis_mano.py `
-  --json out\miura_mano_fit_frame0.json `
-  --joints_npy out\miura_joints21.npy `
+  --json out\akimoto_frame0.json `
+  --joints_npy out\akimoto.npy `
   --frame 0 `
   --side right `
   --show_mano_frame
 
-# npy visualize
-python tools\vis_joints_npy.py `
---npy out\miura_joints21.npy `
---frame 0
+python tools\vis_mano.py `
+  --json out\miura_frame0to200.json `
+  --joints_npy out\miura.npy `
+  --frame 100 `
+  --side right `
+  --show_mano_frame
+
+python tools\vis_mano.py `
+  --json out\miura_all.json `
+  --joints_npy out\miura.npy `
+  --frame 100 `
+  --side right
