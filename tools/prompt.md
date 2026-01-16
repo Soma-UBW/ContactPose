@@ -22,24 +22,24 @@ python tools\csv_to_npy.py `
 
 # npy visualize
 python tools\vis_joints_npy.py `
---npy out\akimoto.npy `
---frame 0
+--npy out\miura.npy `
+--frame 3200
 
 # npy to json
 
 python tools\fit_one_frame.py `
-  --joints_npy out\akimoto.npy `
+  --joints_npy out\watanabe.npy `
   --frame 0 `
   --side right `
   --out_json out\akimoto_frame0.json
 
 python tools\fit_all_frames_mp.py `
-  --joints_npy out\miura.npy `
+  --joints_npy out\watanabe.npy `
   --side right `
-  --start 0 --end 200 `
+  --start 0 --end 10000 `
   --workers 8 `
   --only_final `
-  --out_json out\miura_frame0to200.json
+  --out_json out\watanabe_frame0-10k.json
 
 python tools\fit_all_frames_mp.py `
   --joints_npy out\miura.npy `
@@ -51,21 +51,8 @@ python tools\fit_all_frames_mp.py `
 # json visualize
 
 python tools\vis_mano.py `
-  --json out\akimoto_frame0.json `
-  --joints_npy out\akimoto.npy `
-  --frame 0 `
+  --json out\miura_frame0-10k.json `
+  --joints_npy out\miura.npy `
+  --frame 3130 `
   --side right `
   --show_mano_frame
-
-python tools\vis_mano.py `
-  --json out\miura_frame0to200.json `
-  --joints_npy out\miura.npy `
-  --frame 100 `
-  --side right `
-  --show_mano_frame
-
-python tools\vis_mano.py `
-  --json out\miura_all.json `
-  --joints_npy out\miura.npy `
-  --frame 100 `
-  --side right
